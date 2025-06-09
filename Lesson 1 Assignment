@@ -1,0 +1,12 @@
+print("Hello, world!")
+greeting = "Hi there!"
+print(greeting)
+#wrong_greeting = "Hi there!" # This would be the corrected way if assignment was the intention
+#5 == 5 # This is a comparison, which is valid
+print(5 + 3)
+print(10 - 2)
+print(4 * 2)
+print(16 / 2)
+print(5 == 5)
+print(5 == 6)
+print("Completed by, Ximena")
