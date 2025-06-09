@@ -1,0 +1,20 @@
+#Ask for user input
+first_name = input("Enter your first name: ")
+last_name = input("Enter your last name:Callejas ")
+current_year = int(input("Enter the current year:"))
+birth_year = int(input("Enter your birth year: "))
+
+# Calculate age
+age = current_year - birth_year
+
+# Print greeting and age using string concatenation with escape sequence for a new line
+print("Hello " + first_name + " " + last_name + "!\\nYou are " + str(age) + " years old this year.")
+
+# Increment age using compound assignment operator
+age += 1
+
+# Print next year's age using an f-string
+print(f"Next year, you will be {age} years old in {current_year + 1}.")
+
+# Completion statement
+print("Completed by, Ximena")
