@@ -1,0 +1,45 @@
+from random import randrange
+
+def play_game():
+    print("Welcome to the Number Guessing Game!")
+    print("Your goal is to guess the random number between 0 and 100.")
+    print("You have 10 tries to guess the correct number.\n")
+
+    random_number = randrange(0, 101)
+    # print(random_number)  # Uncomment for testing
+
+    guess_count = 0
+    max_guesses = 10
+
+    while guess_count < max_guesses:
+        guess_count += 1
+        try:
+            guess = int(input(f"Guess #{guess_count}: Enter your guess (0-100): "))
+        except ValueError:
+            print("Invalid input. Please enter an integer between 0 and 100.")
+            guess_count -= 1
+            continue
+
+        if guess == random_number:
+            print(f"Guess #{guess_count}: {guess} is correct! 🎉 You won in {guess_count} tries.")
+            break
+        elif guess < random_number:
+            print(f"Guess #{guess_count}: {guess} is too low. Try again.")
+        else:
+            print(f"Guess #{guess_count}: {guess} is too high. Try again.")
+
+        if guess_count == max_guesses:
+            print(f"Sorry, you've run out of tries. The correct number was {random_number}.")
+
+def main():
+    while True:
+        play_game()
+        again = input("Would you like to play again? (Y/N): ").strip().lower()
+        while again not in ['y', 'n']:
+            again = input("Invalid input. Please enter 'Y' or 'N': ").strip().lower()
+        if again == 'n':
+            break
+
+    print("\nCompleted by, Ximena Callejas")
+
+main()
