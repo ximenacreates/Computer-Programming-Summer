@@ -1,0 +1,62 @@
+import random
+
+def main():
+    # Step 1: Create an empty list for grades
+    grades = []
+
+    # Step 2: Collect grades from user
+    while True:
+        user_input = input("Enter a grade (or -1 to finish): ")
+        if user_input == "-1":
+            break
+        grades.append(int(user_input))
+
+    # Step 3: Print the list of grades
+    print("\nGrades entered:", grades)
+
+    # Step 4: Remove the lowest grade
+    print("\n--- Removing the lowest grade ---")
+    lowest = min(grades)
+    index = grades.index(lowest)
+    grades.pop(index)
+    print("Grades after removing lowest:", grades)
+
+    # Step 5: Remove a random grade
+    print("\n--- Removing a random grade ---")
+    random_grade = random.choice(grades)
+    grades.remove(random_grade)
+    print("Grades after removing random:", grades)
+
+    # Step 6: Edit a grade
+    print("\n--- Editing a grade ---")
+    for i in range(len(grades)):
+        print(f"{i + 1}. {grades[i]}")
+
+    while True:
+        index_to_edit = int(input("Enter the number of the grade you'd like to edit: "))
+        if 1 <= index_to_edit <= len(grades):
+            break
+        print("Invalid number. Try again.")
+
+    new_grade = int(input("Enter the new grade: "))
+    grades[index_to_edit - 1] = new_grade
+    print("Grades after editing:", grades)
+
+    # Step 7: Sort and reverse
+    print("\n--- Sorting and reversing grades ---")
+    grades.sort()
+    grades.reverse()
+    print("Grades after sorting and reversing:", grades)
+
+    # Step 8: Total and average
+    print("\n--- Total and average ---")
+    total = sum(grades)
+    average = total / len(grades)
+    print("Total of grades:", total)
+    print("Average grade:", average)
+
+    # Step 9: Completion
+    print("\nCompleted by, Ximena")
+
+if __name__ == "__main__":
+    main()
