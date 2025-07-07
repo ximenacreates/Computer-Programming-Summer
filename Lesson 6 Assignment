@@ -1,0 +1,55 @@
+def main():
+    # Step 1: Create empty dictionary
+    student_info = {}
+
+    # Step 2: Add students
+    student_info["Alice"] = {
+        "ID": "S001",
+        "GPA": 3.5,
+        "Credits": 45,
+        "Grades": [90, 85, 88]
+    }
+
+    student_info["Bob"] = {
+        "ID": "S002",
+        "GPA": 3.8,
+        "Credits": 60,
+        "Grades": [92, 89, 94]
+    }
+
+    # Step 3: Print full dictionary
+    print("All Student Information:")
+    print(student_info)
+
+    # Step 4: Print student names
+    print("\n--- Student Names ---")
+    for name in student_info:
+        print(name)
+
+    # Step 5: Print full details
+    print("\n--- Accessing Student Information ---")
+    print("Name\tID\tGPA\tCredits\tGrades")
+    for name, details in student_info.items():
+        print(f"{name}\t{details['ID']}\t{details['GPA']}\t{details['Credits']}\t{details['Grades']}")
+
+    # Step 6: Remove a student
+    print("\n--- Removing a Student ---")
+    student_info.pop("Bob")
+    print(student_info)
+
+    # Step 7: Access GPA
+    print("\n--- Accessing GPA Information ---")
+    for name in student_info:
+        gpa = student_info.get(name)["GPA"]
+        print(f"{name}'s GPA: {gpa}")
+
+    # Step 8: Clear dictionary
+    print("\n--- Clearing Student Registry ---")
+    student_info.clear()
+    print(student_info)
+
+    # Final step
+    print("\nCompleted by, Ximena")
+
+if __name__ == "__main__":
+    main()
