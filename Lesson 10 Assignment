@@ -1,0 +1,43 @@
+def main():
+    print("Welcome to the String Search and Replace Program!")
+
+    # Get input string and substring to search
+    main_string = get_input("Enter the main string you want to search through: ")
+    sub_string = get_input("Enter the substring you want to search for: ")
+
+    # Find substring and get index
+    index = find_substring(main_string, sub_string)
+
+    # If found, ask if user wants to replace it
+    if index != -1:
+        choice = get_yes_or_no("Do you want to replace the substring? (yes/no): ")
+        if choice == "yes":
+            new_string = get_input("Enter the new string to replace with: ")
+            updated_string = main_string.replace(sub_string, new_string, 1)
+            print("Updated string:", updated_string)
+        else:
+            print("No replacement was made.")
+    print("Thank you for using the program.")
+    print("Completed by, Ximena Callejas")
+
+def get_input(prompt):
+    return input(prompt)
+
+def find_substring(main_str, sub_str):
+    index = main_str.find(sub_str)
+    if index != -1:
+        print(f"The substring was found at index {index}.")
+    else:
+        print("The substring was not found.")
+    return index
+
+def get_yes_or_no(prompt):
+    while True:
+        response = input(prompt).lower()
+        if response in ["yes", "no"]:
+            return response
+        else:
+            print("Please enter 'yes' or 'no'.")
+
+# Run the program
+main()
