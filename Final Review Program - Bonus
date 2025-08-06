@@ -1,0 +1,111 @@
+import csv
+from datetime import datetime
+
+# 📂 Read data from the text file
+def read_contact_file(filename):
+    try:
+        with open(filename, 'r') as file:
+            lines = file.readlines()
+            contacts = [line.strip().split() for line in lines]
+        return contacts
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
+        return []
+
+# 🗑️ Delete an entry from the contact list
+def delete_entry(contacts):
+    while True:
+        print("\nCurrent Employee Contact List:")
+        for i, contact in enumerate(contacts):
+            print(f"{i}: {contact[0]} - {contact[1]}")
+        
+        choice = input("\nEnter the number of the entry to delete (or 'x' to cancel): ").strip()
+        
+        if choice.lower() == 'x':
+            print("Deletion cancelled.")
+            break
+        
+        try:
+            index = int(choice)
+            if 0 <= index < len(contacts):
+                removed = contacts[index]
+                del contacts[index]
+                print(f"✅ Removed entry: {removed[0]} - {removed[1]}")
+                break
+            else:
+                print("❌ Invalid index. Please choose a valid number.")
+        except ValueError:
+            print("❌ Invalid input. Please enter a number or 'x' to cancel.")
+
+# ✏️ Edit an entry in the contact list
+def edit_entry(contacts):
+    while True:
+        print("\nCurrent Employee Contact List:")
+        for i, contact in enumerate(contacts):
+            print(f"{i}: {contact[0]} - {contact[1]}")
+        
+        choice = input("\nEnter the number of the entry to edit (or 'x' to cancel): ").strip()
+        
+        if choice.lower() == 'x':
+            print("Editing cancelled.")
+            break
+        
+        try:
+            index = int(choice)
+            if 0 <= index < len(contacts):
+                new_name = input("Enter new name: ").strip()
+                new_email = input("Enter new email: ").strip()
+                contacts[index] = [new_name, new_email]
+                print(f"✅ Updated entry to: {new_name} - {new_email}")
+                break
+            else:
+                print("❌ Invalid index. Please choose a valid number.")
+        except ValueError:
+            print("❌ Invalid input. Please enter a number or 'x' to cancel.")
+
+# 💾 Save contacts to a CSV file
+def save_to_csv(contacts, filename):
+    try:
+        with open(filename, 'w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(["Name", "Email"])
+            writer.writerows(contacts)
+        print(f"📁 Data saved to '{filename}' at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    except Exception as e:
+        print(f"❌ Error saving to CSV: {e}")
+
+# 🚀 Main function
+def main():
+    txt_file = "employee_contact_info.txt"
+    csv_file = "employee_contact_info.csv"
+    
+    contacts = read_contact_file(txt_file)
+    
+    if not contacts:
+        return
+    
+    while True:
+        print("\n📋 Menu:")
+        print("1. Edit an entry")
+        print("2. Delete an entry")
+        print("3. Save and exit")
+        print("4. Exit without saving")
+        
+        choice = input("Choose an option: ").strip()
+        
+        if choice == '1':
+            edit_entry(contacts)
+        elif choice == '2':
+            delete_entry(contacts)
+        elif choice == '3':
+            save_to_csv(contacts, csv_file)
+            break
+        elif choice == '4':
+            print("Exited without saving.")
+            break
+        else:
+            print("❌ Invalid choice. Please select 1–4.")
+
+# 🧠 Run the program
+if __name__ == "__main__":
+    main()
