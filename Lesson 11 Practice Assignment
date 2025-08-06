@@ -1,0 +1,68 @@
+import datetime
+
+# Global list to store tasks
+tasks = []
+
+def main():
+    print("Welcome to the Weekly Planner App!")
+    while True:
+        print("\nMenu Options:")
+        print("1. Add a Task")
+        print("2. View Tasks Due This Week")
+        print("3. List All Scheduled Tasks")
+        print("4. Exit")
+
+        choice = input("Enter your choice (1-4): ")
+
+        if choice == "1":
+            add_task()
+        elif choice == "2":
+            view_weekly_tasks()
+        elif choice == "3":
+            list_all_tasks()
+        elif choice == "4":
+            print("Goodbye! Thanks for using the Weekly Planner App.")
+            break
+        else:
+            print("Invalid choice. Please try again.")
+
+def add_task():
+    name = input("Enter the task name: ")
+    while True:
+        due_date_str = input("Enter the due date (YYYY-MM-DD): ")
+        try:
+            due_date = datetime.datetime.strptime(due_date_str, "%Y-%m-%d").date()
+            tasks.append({"name": name, "due_date": due_date})
+            print(f"Task '{name}' added successfully for {due_date}.")
+            break
+        except ValueError:
+            print("Invalid date format. Please use YYYY-MM-DD.")
+
+def view_weekly_tasks():
+    today = datetime.date.today()
+    start_of_week = today - datetime.timedelta(days=today.weekday())
+    end_of_week = start_of_week + datetime.timedelta(days=6)
+
+    weekly_tasks = [task for task in tasks if start_of_week <= task["due_date"] <= end_of_week]
+
+    if weekly_tasks:
+        print("\nTasks Due This Week:")
+        for task in weekly_tasks:
+            print(f"- {task['name']} (Due: {task['due_date']})")
+    else:
+        print("No tasks are due this week.")
+
+def list_all_tasks():
+    if not tasks:
+        print("No tasks have been scheduled.")
+        return
+
+    sorted_tasks = sorted(tasks, key=lambda x: x["due_date"])
+    print("\nAll Scheduled Tasks:")
+    for task in sorted_tasks:
+        print(f"- {task['name']} (Due: {task['due_date']})")
+
+# Run the program
+if __name__ == "__main__":
+    main()
+    print("\nCompleted by, Ximena")
